@@ -4,12 +4,10 @@ import com.anderson.booksale.domain.Categoria;
 import com.anderson.booksale.dtos.CategoriaDTO;
 import com.anderson.booksale.repositories.CategoriaRepository;
 import com.anderson.booksale.service.exceptions.ObjectNotFoundException;
-import jakarta.persistence.metamodel.SingularAttribute;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +41,10 @@ public class CategoriaService {
 
     public void delete(Integer id) {
         findById(id);
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new com.anderson.booksale.service.exceptions.DataIntegrityViolationException("Categoria não pode ser deletada! Possui livros associados.");
+        }
     }
 }
