@@ -3,6 +3,7 @@ package com.anderson.booksale.resources;
 import com.anderson.booksale.domain.Categoria;
 import com.anderson.booksale.dtos.CategoriaDTO;
 import com.anderson.booksale.service.CategoriaService;
+import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -45,4 +48,10 @@ public class CategoriaResource {
         Categoria newObj = service.update(id, objDto);
         return ResponseEntity.ok().body(new CategoriaDTO(newObj));
     }
+
+    @DeleteMapping(value = "/{id}")
+   public ResponseEntity<Void> delete(@PathVariable Integer id) {
+       service.delete(id);
+       return ResponseEntity.noContent().build();
+   }
 }
