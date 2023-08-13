@@ -1,5 +1,6 @@
 package com.anderson.booksale.service;
 
+import com.anderson.booksale.domain.Categoria;
 import com.anderson.booksale.domain.Livro;
 import com.anderson.booksale.repositories.LivroRepository;
 import com.anderson.booksale.service.exceptions.ObjectNotFoundException;
@@ -38,5 +39,12 @@ public class LivroService {
         newObj.setTitulo(obj.getTitulo());
         newObj.setNome_autor(obj.getNome_autor());
         newObj.setTexto(obj.getTexto());
+    }
+
+    public Livro create(Integer id_cat, Livro obj) {
+        obj.setId(null);
+        Categoria cat = categoriaService.findById(id_cat);
+        obj.setCategoria(cat);
+        return repository.save(obj);
     }
 }
