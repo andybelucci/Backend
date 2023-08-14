@@ -1,5 +1,8 @@
 package com.anderson.booksale.resources;
 
+import lombok.Getter;
+
+@Getter
 public class StandardError {
 
     private Long timestamp;
@@ -15,24 +18,12 @@ public class StandardError {
         this.error = error;
     }
 
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public String getError() {
-        return error;
     }
 
     public void setError(String error) {

@@ -2,8 +2,10 @@ package com.anderson.booksale.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.Getter;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -20,8 +22,17 @@ public class Livro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Campo TITULO é requerido!")
+    @Length(min = 3, max = 50, message = "O campo TITULO deve ter de 3 a 50 caracteres.")
     private String titulo;
+
+    @NotEmpty(message = "Campo NOME_AUTOR é requerido!")
+    @Length(min = 3, max = 50, message = "O campo NOME_AUTOR deve ter de 3 a 50 caracteres.")
     private String nome_autor;
+
+    @NotEmpty(message = "Campo TEXTO é requerido!")
+    @Length(min = 3, max = 2000000, message = "O campo TEXTO deve ter de 3 a 2.000.000 caracteres.")
     private String texto;
 
     @ManyToOne

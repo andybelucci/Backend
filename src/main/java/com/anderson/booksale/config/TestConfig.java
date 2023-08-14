@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-@SuppressWarnings("ALL")
+
 @Configuration
 @Profile("test")
 public class TestConfig {
@@ -17,5 +17,8 @@ public class TestConfig {
     @Bean
     public void instanciaBaseDeDados() {
         this.dbService.instanciaBaseDeDados();
+
     }
+
+
 }
